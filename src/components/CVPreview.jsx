@@ -54,6 +54,58 @@ export default function CVPreview({ data }) {
           ))}
         </div>
       )}
+
+      {data.skills && data.skills.length > 0 && (
+        <div className="cv-section">
+          <h2>Compétences Informatiques</h2>
+          {data.skills.map((skill, index) => (
+            <div key={index} className="cv-entry">
+              <div className="cv-entry-header">
+                <h3>{skill.skill}</h3>
+                <span className="cv-level">{skill.level}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.languages && data.languages.length > 0 && (
+        <div className="cv-section">
+          <h2>Langues</h2>
+          {data.languages.map((lang, index) => (
+            <div key={index} className="cv-entry">
+              <div className="cv-entry-header">
+                <h3>{lang.language}</h3>
+                <span className="cv-level">{lang.level}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.hobbies && data.hobbies.length > 0 && (
+        <div className="cv-section">
+          <h2>Loisirs</h2>
+          <div className="cv-hobbies-list">
+            {data.hobbies.map((hobby, index) => (
+              <span key={index} className="cv-hobby-tag">{hobby.hobby}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {data.references && data.references.length > 0 && (
+        <div className="cv-section">
+          <h2>Références</h2>
+          {data.references.map((ref, index) => (
+            <div key={index} className="cv-entry">
+              <h3>{ref.name}</h3>
+              <p className="cv-company">{ref.position}</p>
+              <p className="cv-description">{ref.contact}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

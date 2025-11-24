@@ -1,33 +1,66 @@
 import React from 'react';
+import '../styles/Education.css';
 
-export default function Education({ data, setData }) {
+export default function Education({ data, setData, editMode, onToggleEdit }) {
   const handleAddEducation = () => {
-    setData(prev => ({
-      ...prev,
-      education: [...(prev.education || []), { etablissement: '', diplome: '', dateDebut: '', dateFin: '' }]
-    }));
-  };
-
-  const handleEducationChange = (index, field, value) => {
-    setData(prev => {
-      const newEducation = [...(prev.education || [])];
-      newEducation[index] = { ...newEducation[index], [field]: value };
-      return { ...prev, education: newEducation };
+    setData({
+      ...data,
+      education: [...(data.education || []), { etablissement: '', diplome: '', dateDebut: '', dateFin: '' }]
     });
   };
 
-  const handleDeleteEducation = (index) => {
-    setData(prev => ({
-      ...prev,
-      education: prev.education.filter((_, i) => i !== index)
-    }));
+  const handleEducationChange = (index, field, value) => {
+    const newEducation = [...(data.education || [])];
+    newEducation[index] = { ...newEducation[index], [field]: value };
+    setData({ ...data, education: newEducation });
   };
 
+  const handleDeleteEducation = (index) => {
+    setData({
+      ...data,
+      education: data.education.filter((_, i) => i !== index)
+    });
+  };
+
+  if (!editMode) {
+    return (
+      <div className="education-section">
+        <div className="education-header">
+          <h2>Parcours Scolaire</h2>
+          <button 
+            type="button" 
+            className="btn-edit" 
+            onClick={onToggleEdit}
+          >
+            ✎ Modifier
+          </button>
+        </div>
+        <div className="education-display">
+          {data.education && data.education.length > 0 ? (
+            data.education.map((edu, index) => (
+              <div key={index} className="education-entry-display">
+                {edu.diplome && <p><strong>Diplôme :</strong> {edu.diplome}</p>}
+                {edu.etablissement && <p><strong>Établissement :</strong> {edu.etablissement}</p>}
+                {(edu.dateDebut || edu.dateFin) && (
+                  <p><strong>Dates :</strong> {edu.dateDebut} {edu.dateDebut && edu.dateFin && ' - '} {edu.dateFin}</p>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="education-empty">Aucune formation renseignée</p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="section">
-      <h2>Parcours Scolaire</h2>
+    <div className="education-section">
+      <div className="education-header">
+        <h2>Parcours Scolaire</h2>
+      </div>
       {(data.education || []).map((edu, index) => (
-        <div key={index} className="entry">
+        <div key={index} className="education-entry-edit">
           <div className="form-group">
             <label htmlFor={`etablissement-${index}`}>Établissement :</label>
             <input
@@ -69,13 +102,18 @@ export default function Education({ data, setData }) {
             </div>
           </div>
           <button onClick={() => handleDeleteEducation(index)} className="btn-delete">
-            Supprimer
+            🗑 Supprimer
           </button>
         </div>
       ))}
-      <button onClick={handleAddEducation} className="btn-add">
-        + Ajouter une formation
-      </button>
+      <div className="education-button-group">
+        <button type="button" onClick={handleAddEducation} className="btn-add">
+          + Ajouter une formation
+        </button>
+        <button type="button" className="btn-submit" onClick={onToggleEdit}>
+          ✓ Soumettre
+        </button>
+      </div>
     </div>
   );
 }

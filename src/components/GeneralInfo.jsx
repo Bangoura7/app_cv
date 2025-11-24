@@ -1,17 +1,45 @@
 import React from 'react';
+import '../styles/GeneralInfo.css';
 
-export default function GeneralInfo({ data, setData }) {
+export default function GeneralInfo({ data, setData, editMode, onToggleEdit }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData(prev => ({
-      ...prev,
+    setData({
+      ...data,
       [name]: value
-    }));
+    });
   };
 
+  if (!editMode) {
+    return (
+      <div className="generalinfo-section">
+        <div className="generalinfo-header">
+          <h2>Informations Générales</h2>
+          <button 
+            type="button" 
+            className="btn-edit" 
+            onClick={onToggleEdit}
+          >
+            ✎ Modifier
+          </button>
+        </div>
+        <div className="generalinfo-display">
+          {data.nom && <p><strong>Nom :</strong> {data.nom}</p>}
+          {data.email && <p><strong>Email :</strong> {data.email}</p>}
+          {data.telephone && <p><strong>Téléphone :</strong> {data.telephone}</p>}
+          {!data.nom && !data.email && !data.telephone && (
+            <p className="generalinfo-empty">Aucune information renseignée</p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="section">
-      <h2>Informations Générales</h2>
+    <div className="generalinfo-section">
+      <div className="generalinfo-header">
+        <h2>Informations Générales</h2>
+      </div>
       <div className="form-group">
         <label htmlFor="nom">Nom :</label>
         <input
@@ -45,6 +73,13 @@ export default function GeneralInfo({ data, setData }) {
           placeholder="06 XX XX XX XX"
         />
       </div>
+      <button 
+        type="button" 
+        className="btn-submit" 
+        onClick={onToggleEdit}
+      >
+        ✓ Soumettre
+      </button>
     </div>
   );
 }

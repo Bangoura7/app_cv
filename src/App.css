@@ -1,71 +1,134 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* App.css - Design professionnel moderne */
 
 .app-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 2rem;
+  background: #f5f5f5;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .app-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .app-header h1 {
-  color: white;
+  color: #1a1a1a;
   font-size: 2.5rem;
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  letter-spacing: -0.5px;
 }
 
 .main-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: 2rem;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
 .form-section {
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.preview-section {
-  background: white;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+  height: fit-content;
   max-height: 90vh;
   overflow-y: auto;
 }
 
-.section {
+.preview-section {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Scrollbar personnalisé */
+.form-section::-webkit-scrollbar,
+.preview-section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.form-section::-webkit-scrollbar-track,
+.preview-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.form-section::-webkit-scrollbar-thumb,
+.preview-section::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 4px;
+}
+
+.form-section::-webkit-scrollbar-thumb:hover,
+.preview-section::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Sections */
+.cv-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.section,
+.generalinfo-section,
+.education-section,
+.experience-section {
   margin-bottom: 2rem;
   padding-bottom: 2rem;
-  border-bottom: 2px solid #eee;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.section:last-child {
+.section:last-child,
+.generalinfo-section:last-child,
+.education-section:last-child,
+.experience-section:last-child {
   border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-.section h2 {
-  color: #667eea;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #667eea;
+/* Headers avec boutons Edit */
+.section h2,
+.generalinfo-section h2,
+.education-section h2,
+.experience-section h2,
+.generalinfo-header h2,
+.education-header h2,
+.experience-header h2 {
+  color: #1a1a1a;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  border: none;
 }
 
+.generalinfo-header,
+.education-header,
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.generalinfo-header h2,
+.education-header h2,
+.experience-header h2 {
+  margin: 0;
+}
+
+/* Formulaire */
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .form-group label {
@@ -79,19 +142,22 @@
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
-  transition: border-color 0.3s;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  color: #000;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: #667eea;
-  box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .form-row {
@@ -100,74 +166,189 @@
   gap: 1rem;
 }
 
-.entry {
+/* Entrées */
+.entry,
+.education-entry-edit,
+.experience-entry-edit {
   background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 5px;
+  padding: 1.2rem;
+  border-radius: 8px;
   margin-bottom: 1rem;
-  border-left: 4px solid #667eea;
+  border: 1px solid #e8e8e8;
 }
 
+/* Boutons */
 .btn-add,
-.btn-delete {
-  padding: 0.75rem 1.5rem;
+.btn-delete,
+.btn-edit,
+.btn-submit {
+  padding: 0.65rem 1.2rem;
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .btn-add {
   background: #667eea;
   color: white;
-  margin-top: 0.5rem;
+  width: 100%;
+  justify-content: center;
 }
 
 .btn-add:hover {
   background: #5568d3;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transform: translateY(-1px);
 }
 
 .btn-delete {
-  background: #ff6b6b;
-  color: white;
+  background: #fee;
+  color: #dc2626;
   padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  width: auto;
 }
 
 .btn-delete:hover {
-  background: #ff5252;
-  transform: translateY(-2px);
+  background: #fdd;
+  color: #b91c1c;
 }
 
-/* CV Preview Styles */
-.cv-preview {
-  padding: 2rem;
+.btn-edit {
+  background: #e0f7fa;
+  color: #0097a7;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  width: auto;
+}
+
+.btn-edit:hover {
+  background: #b3e5fc;
+  color: #006064;
+}
+
+.btn-submit {
+  background: #667eea;
+  color: white;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  background: #5568d3;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Groupes de boutons */
+.button-group,
+.education-button-group,
+.experience-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Mode affichage */
+.display-mode,
+.generalinfo-display,
+.education-display,
+.experience-display {
+  background: #f8f9fa;
+  padding: 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+}
+
+.display-mode p,
+.generalinfo-display p,
+.education-display p,
+.experience-display p {
+  margin-bottom: 0.8rem;
+  color: #333;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.display-mode strong,
+.generalinfo-display strong,
+.education-display strong,
+.experience-display strong {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.display-entry,
+.education-entry-display,
+.experience-entry-display {
   background: white;
-  border-radius: 5px;
-  font-family: 'Georgia', serif;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #e8e8e8;
+}
+
+.display-entry p:last-child,
+.education-entry-display p:last-child,
+.experience-entry-display p:last-child {
+  margin-bottom: 0;
+}
+
+.empty-message,
+.generalinfo-empty,
+.education-empty,
+.experience-empty {
+  color: #999;
+  font-style: italic;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* CV Preview */
+.cv-preview {
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .cv-header {
-  text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   padding-bottom: 2rem;
-  border-bottom: 3px solid #333;
+  border-bottom: 2px solid #e8e8e8;
 }
 
-.cv-header h1 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 0.5rem;
+.cv-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.contact-info {
+.cv-profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #667eea;
+  flex-shrink: 0;
+}
+
+.cv-header-text h1 {
+  font-size: 2.2rem;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.cv-contact-info {
   color: #666;
   font-size: 0.95rem;
+  margin: 0;
 }
 
 .cv-section {
@@ -175,16 +356,16 @@
 }
 
 .cv-section h2 {
-  font-size: 1.3rem;
-  color: #333;
+  font-size: 1.2rem;
+  color: #1a1a1a;
   margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
   border-bottom: 2px solid #667eea;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .cv-entry {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
 
 .cv-entry-header {
@@ -192,63 +373,83 @@
   justify-content: space-between;
   align-items: start;
   margin-bottom: 0.5rem;
+  gap: 1rem;
 }
 
 .cv-entry h3 {
-  font-size: 1.1rem;
-  color: #333;
-  font-weight: 700;
+  font-size: 1.05rem;
+  color: #1a1a1a;
+  font-weight: 600;
+  margin: 0;
 }
 
-.cv-entry .company {
+.cv-entry .cv-company {
   color: #667eea;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin-bottom: 0.5rem;
 }
 
-.cv-entry .dates {
+.cv-entry .cv-dates {
   color: #999;
   font-size: 0.9rem;
   white-space: nowrap;
 }
 
-.cv-entry .description {
-  color: #666;
+.cv-entry .cv-description {
+  color: #555;
   line-height: 1.6;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
+/* Responsive */
+@media (max-width: 1200px) {
   .main-content {
     grid-template-columns: 1fr;
+  }
+
+  .form-section,
+  .preview-section {
+    max-height: none;
   }
 
   .form-row {
     grid-template-columns: 1fr;
   }
-
-  .app-header h1 {
-    font-size: 2rem;
-  }
 }
 
 @media (max-width: 768px) {
   .app-container {
-    padding: 1rem;
+    padding: 1rem 0.5rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.8rem;
   }
 
   .form-section,
   .preview-section {
     padding: 1.5rem;
+    border-radius: 8px;
   }
 
-  .cv-header h1 {
-    font-size: 1.8rem;
+  .cv-header-content {
+    flex-direction: column;
+    text-align: center;
   }
 
-  .contact-info {
-    font-size: 0.85rem;
+  .cv-profile-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .cv-entry-header {
+    flex-direction: column;
+  }
+
+  .cv-entry .cv-dates {
+    white-space: normal;
   }
 }

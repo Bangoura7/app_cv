@@ -1,33 +1,67 @@
 import React from 'react';
+import '../styles/Experience.css';
 
-export default function Experience({ data, setData }) {
+export default function Experience({ data, setData, editMode, onToggleEdit }) {
   const handleAddExperience = () => {
-    setData(prev => ({
-      ...prev,
-      experience: [...(prev.experience || []), { entreprise: '', poste: '', responsabilites: '', dateDebut: '', dateFin: '' }]
-    }));
-  };
-
-  const handleExperienceChange = (index, field, value) => {
-    setData(prev => {
-      const newExperience = [...(prev.experience || [])];
-      newExperience[index] = { ...newExperience[index], [field]: value };
-      return { ...prev, experience: newExperience };
+    setData({
+      ...data,
+      experience: [...(data.experience || []), { entreprise: '', poste: '', responsabilites: '', dateDebut: '', dateFin: '' }]
     });
   };
 
-  const handleDeleteExperience = (index) => {
-    setData(prev => ({
-      ...prev,
-      experience: prev.experience.filter((_, i) => i !== index)
-    }));
+  const handleExperienceChange = (index, field, value) => {
+    const newExperience = [...(data.experience || [])];
+    newExperience[index] = { ...newExperience[index], [field]: value };
+    setData({ ...data, experience: newExperience });
   };
 
+  const handleDeleteExperience = (index) => {
+    setData({
+      ...data,
+      experience: data.experience.filter((_, i) => i !== index)
+    });
+  };
+
+  if (!editMode) {
+    return (
+      <div className="experience-section">
+        <div className="experience-header">
+          <h2>Expérience Professionnelle</h2>
+          <button 
+            type="button" 
+            className="btn-edit" 
+            onClick={onToggleEdit}
+          >
+            ✎ Modifier
+          </button>
+        </div>
+        <div className="experience-display">
+          {data.experience && data.experience.length > 0 ? (
+            data.experience.map((exp, index) => (
+              <div key={index} className="experience-entry-display">
+                {exp.poste && <p><strong>Poste :</strong> {exp.poste}</p>}
+                {exp.entreprise && <p><strong>Entreprise :</strong> {exp.entreprise}</p>}
+                {(exp.dateDebut || exp.dateFin) && (
+                  <p><strong>Dates :</strong> {exp.dateDebut} {exp.dateDebut && exp.dateFin && ' - '} {exp.dateFin}</p>
+                )}
+                {exp.responsabilites && <p><strong>Responsabilités :</strong> {exp.responsabilites}</p>}
+              </div>
+            ))
+          ) : (
+            <p className="experience-empty">Aucune expérience renseignée</p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="section">
-      <h2>Expérience Professionnelle</h2>
+    <div className="experience-section">
+      <div className="experience-header">
+        <h2>Expérience Professionnelle</h2>
+      </div>
       {(data.experience || []).map((exp, index) => (
-        <div key={index} className="entry">
+        <div key={index} className="experience-entry-edit">
           <div className="form-group">
             <label htmlFor={`entreprise-${index}`}>Entreprise :</label>
             <input
@@ -78,14 +112,19 @@ export default function Experience({ data, setData }) {
               />
             </div>
           </div>
-          <button onClick={() => handleDeleteExperience(index)} className="btn-delete">
-            Supprimer
+          <button type="button" onClick={() => handleDeleteExperience(index)} className="btn-delete">
+            🗑 Supprimer
           </button>
         </div>
       ))}
-      <button onClick={handleAddExperience} className="btn-add">
-        + Ajouter une expérience
-      </button>
+      <div className="experience-button-group">
+        <button type="button" onClick={handleAddExperience} className="btn-add">
+          + Ajouter une expérience
+        </button>
+        <button type="button" className="btn-submit" onClick={onToggleEdit}>
+          ✓ Soumettre
+        </button>
+      </div>
     </div>
   );
 }

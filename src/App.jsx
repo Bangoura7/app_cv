@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './styles/globals.css'
 import './App.css'
 import CVForm from './components/CVForm'
 import CVPreview from './components/CVPreview'

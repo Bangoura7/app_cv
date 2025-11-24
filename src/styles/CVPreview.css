@@ -1,0 +1,95 @@
+/* Styles spécifiques au composant CVPreview */
+
+.cv-preview {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.cv-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+.cv-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cv-profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #667eea;
+  flex-shrink: 0;
+}
+
+.cv-header-text h1 {
+  font-size: 2.2rem;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.cv-contact-info {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.cv-section {
+  margin-bottom: 2rem;
+}
+
+.cv-section h2 {
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #667eea;
+  font-weight: 600;
+}
+
+.cv-entry {
+  margin-bottom: 1.2rem;
+}
+
+.cv-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.cv-entry h3 {
+  font-size: 1.05rem;
+  color: #1a1a1a;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cv-entry .cv-company {
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.cv-entry .cv-dates {
+  color: #999;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.cv-entry .cv-description {
+  color: #555;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
